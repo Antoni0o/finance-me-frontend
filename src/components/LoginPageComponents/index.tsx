@@ -20,11 +20,13 @@ export const LoginContent = () => {
     const currentHour = new Date();
     console.log(currentHour.getHours());
 
-    if(Number(currentHour.getHours()) <= 12 && Number(currentHour.getHours()) >= 6) {
+    if(Number(currentHour.getHours()) <= 11 && Number(currentHour.getHours()) >= 6) {
       setMessage('Olá, Bom Dia!');
     } else if(Number(currentHour.getHours()) <= 18 && Number(currentHour.getHours()) >= 12) {
       setMessage('Olá, Boa Tarde!');
-    } else if(Number(currentHour.getHours()) <= 6 && Number(currentHour.getHours()) >= 18) {
+    } else if(Number(currentHour.getHours()) <= 23 && Number(currentHour.getHours()) >= 19) {
+      setMessage('Olá, Boa Noite!');
+    } else if(Number(currentHour.getHours()) <= 5 && Number(currentHour.getHours()) >= 0) {
       setMessage('Olá, Boa Noite!');
     }
   }, [])
