@@ -3,17 +3,31 @@ import { GrGoogle } from "react-icons/gr";
 import Image from "next/image";
 import Logo from '../../../public/logo.png';
 import { RegistrationContainer } from "../../theme/components/registrationContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../../hooks/useAuth";
 
 export const LoginContent = () => {
   const { colorMode } = useColorMode();
+  const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const { signIn } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const currentHour = new Date();
+    console.log(currentHour.getHours());
+
+    if(Number(currentHour.getHours()) <= 12 && Number(currentHour.getHours()) >= 6) {
+      setMessage('Olá, Bom Dia!');
+    } else if(Number(currentHour.getHours()) <= 18 && Number(currentHour.getHours()) >= 12) {
+      setMessage('Olá, Boa Tarde!');
+    } else if(Number(currentHour.getHours()) <= 6 && Number(currentHour.getHours()) >= 18) {
+      setMessage('Olá, Boa Noite!');
+    }
+  }, [])
 
   return (
     <RegistrationContainer>
@@ -34,7 +48,7 @@ export const LoginContent = () => {
           xl: "1rem"
         }}
       >
-        Olá, Boa Noite!
+        {message}
       </Heading>
       <FormControl
         mb={{
