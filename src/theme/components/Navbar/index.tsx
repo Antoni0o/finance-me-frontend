@@ -56,7 +56,9 @@ export const Navbar = ({ color }: INavbarProps) => {
               <Button onClick={() => {
                 router.push('/login');
               }}>Entre</Button>
-              <Button>Cadastre-se</Button>
+              <Button onClick={() => {
+                router.push('/sign-in');
+              }}>Cadastre-se</Button>
             </Flex>
           </Flex>
         </Flex>
@@ -94,8 +96,12 @@ export const Navbar = ({ color }: INavbarProps) => {
               Desenvolvimento
             </Button>
             <Flex gap="1rem" flexDir="column">
-              <Button>Entre</Button>
-              <Button>Cadastre-se</Button>
+              <Button onClick={() => {
+                router.push('/login');
+              }}>Entre</Button>
+              <Button onClick={() => {
+                router.push('/sign-in');
+              }}>Cadastre-se</Button>
             </Flex>
           </Flex>
         </Flex>
