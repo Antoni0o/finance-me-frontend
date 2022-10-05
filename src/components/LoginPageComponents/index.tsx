@@ -1,4 +1,4 @@
-import { Button, Divider, Flex, FormControl, FormLabel, Heading, Input, Link, Text, useColorMode, useToast } from "@chakra-ui/react";
+import { Button, Divider, Flex, FormControl, FormLabel, Heading, Input, Link, Text, useColorMode } from "@chakra-ui/react";
 import { GrGoogle } from "react-icons/gr";
 import Image from "next/image";
 import Logo from '../../../public/logo.png';
@@ -18,7 +18,6 @@ export const LoginContent = () => {
 
   useEffect(() => {
     const currentHour = new Date();
-    console.log(currentHour.getHours());
 
     if(Number(currentHour.getHours()) <= 11 && Number(currentHour.getHours()) >= 6) {
       setMessage('Olá, Bom Dia!');
@@ -110,7 +109,7 @@ export const LoginContent = () => {
         <Link
           onClick={(e) => {
             e.preventDefault();
-            router.push('/esqueceu-a-senha');
+            router.push('/forgot-password');
           }}
           color="green.200"
         >
@@ -157,7 +156,7 @@ export const LoginContent = () => {
         <Link
           onClick={(e) => {
             e.preventDefault();
-            router.push('/sign-in');
+            router.push('/sign-up');
           }}
           color="green.200"
         >

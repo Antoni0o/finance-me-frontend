@@ -13,6 +13,9 @@ const colors = {
     200: '#2EC4B6',
     300: '#2BB6A8',
   },
+  red: {
+    100: '#EF233C'
+  }
 }
 
 export { colors };

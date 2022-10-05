@@ -55,7 +55,6 @@ export function AuthProvider(props: AuxProps) {
       router.push('/home');
     })
     .catch((err) => {
-      console.log(err.message);
       toast({
         title: 'Email e/ou senha incorreto(s)!',
         status: 'error',
