@@ -10,6 +10,7 @@ const colors = {
   },
   green: {
     100: '#CDF3F0',
+    150: '#8DE2DB',
     200: '#2EC4B6',
     300: '#2BB6A8',
   },
