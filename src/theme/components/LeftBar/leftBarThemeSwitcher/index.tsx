@@ -13,7 +13,12 @@ export const LeftBarThemeSwitcher = () => {
           h="20%"
           borderRadius="0"
           variant="ghost"
-          fontSize="2.6rem"
+          fontSize={{
+            sm: "1.4rem",
+            md: "1.6rem",
+            lg: "1.8rem",
+            xl: "2.6rem"
+          }}
           fontWeight="bold"
           _hover={{
             bg: 'green.200',
@@ -34,7 +39,12 @@ export const LeftBarThemeSwitcher = () => {
           h="20%"
           borderRadius="0"
           variant="ghost"
-          fontSize="2.6rem"
+          fontSize={{
+            sm: "1.4rem",
+            md: "1.6rem",
+            lg: "1.8rem",
+            xl: "2.6rem"
+          }}
           fontWeight="bold"
           _hover={{
             bg: 'green.200',

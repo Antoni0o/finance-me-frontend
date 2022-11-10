@@ -19,7 +19,7 @@ export const HomePageContent = () => {
   const [ gridArea, setGridArea ] = useState("10% 90%");
 
   return (
-    <Grid gridTemplateColumns={gridArea} w="100%">
+    <Grid gridTemplateColumns={gridArea} w="100%" transition="0.2s">
       <GridItem
         margin="2rem"
         onMouseEnter={() => {
@@ -32,17 +32,32 @@ export const HomePageContent = () => {
         <LeftBar />
       </GridItem>
       <GridItem
-        margin="2rem"
+        margin={{
+          sm: "1rem",
+          md: "1.2rem",
+          lg: "1.4rem",
+          xl: "2rem"
+        }}
       >
         <Transactions />
         <Flex
           w="100%"
           justifyContent="flex-end"
-          mt="2rem"
+          mt={{
+            sm: "1rem",
+            md: "1.2rem",
+            lg: "1.4rem",
+            xl: "2rem"
+          }}
         >
           <Button
             fontSize="2rem"
-            p="1.6rem 2rem"
+            p={{
+              sm: "0.6rem 1.2rem",
+              md: "1rem 1.4rem",
+              lg: "1.2rem 1.8rem",
+              xl: "1.6rem 2rem"
+            }}
             borderRadius="100px"
             rightIcon={<BiRightArrowAlt />}
           >
@@ -53,10 +68,24 @@ export const HomePageContent = () => {
           flexDir="column"
         >
           <Heading>Notícias</Heading>
-          <Box bg={colorMode === "dark" ? "dark.200" : "green.150"} w="100%" h="33rem" borderRadius="20px" p="1rem" boxShadow="xl" display="flex" alignItems="center">
+          <Box 
+            bg={colorMode === "dark" ? "dark.200" : "green.150"} 
+            w="100%" 
+            h={{
+              sm: "7rem",
+              md: "16rem",
+              lg: "20rem",
+              xl:"33rem"
+            }}
+            borderRadius="20px" 
+            p="1rem"
+            boxShadow="xl" 
+            display="flex" 
+            alignItems="center"
+          >
            <NewsCard
             imageUrl="https://ichef.bbci.co.uk/news/800/cpsprodpb/1671E/production/_127243919_gettyimages-1130747337.jpg.webp"
-            title="As 6 empresas mais endividadas do mundo — e por que isso nem sempre é um problema"
+            title="As 6 empresas mais endividadas do mundo..."
             subtitle="Um balanço saudável e contas equilibradas costumam ser o objetivo de qualquer ator econômico: um Estado, uma empresa ou até mesmo uma família."
             completeNoticeUrl="https://www.bbc.com/portuguese/internacional-63338807"
            />
@@ -64,11 +93,21 @@ export const HomePageContent = () => {
           <Flex
           w="100%"
           justifyContent="flex-end"
-          mt="2rem"
+          mt={{
+            sm: "1rem",
+            md: "1.4rem",
+            lg: "1.6rem",
+            xl: "2rem"
+          }}
         >
           <Button
             fontSize="2rem"
-            p="1.6rem 2rem"
+            p={{
+              sm: "0.6rem 1.2rem",
+              md: "1rem 1.4rem",
+              lg: "1.2rem 1.8rem",
+              xl: "1.6rem 2rem"
+            }}
             borderRadius="100px"
             rightIcon={<BiRightArrowAlt />}
           >

@@ -1,5 +1,12 @@
-import { Box, Button, Flex, Heading, Image, useColorMode } from "@chakra-ui/react";
-import { BiRightArrowAlt } from "react-icons/bi";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  useColorMode,
+} from '@chakra-ui/react';
+import { BiRightArrowAlt } from 'react-icons/bi';
 
 interface INewsCardProps {
   imageUrl: string;
@@ -8,34 +15,79 @@ interface INewsCardProps {
   completeNoticeUrl: string;
 }
 
-export const NewsCard = ({ imageUrl, title, subtitle, completeNoticeUrl }: INewsCardProps) => {
+export const NewsCard = ({
+  imageUrl,
+  title,
+  subtitle,
+  completeNoticeUrl,
+}: INewsCardProps) => {
   const { colorMode } = useColorMode();
 
   return (
     <Box
       bg={colorMode === 'dark' ? 'dark.300' : 'green.100'}
-      w="20rem"
+      w={{
+        sm: '8rem',
+        md: '12rem',
+        lg: '14rem',
+        xl: '20rem',
+      }}
       borderRadius="20px"
     >
       <Image
         src={imageUrl}
         borderRadius="20px 20px 0 0"
         w="100%"
-        h="10rem"
+        h={{
+          sm: '4rem',
+          md: '6rem',
+          lg: '8rem',
+          xl: '10rem',
+        }}
         alt={title}
       />
-      <Box p="1rem">
-        <Heading fontSize="1.8rem">
+      <Box
+        p={{
+          sm: '0.2rem',
+          md: '0.6rem',
+          lg: '0.8rem',
+          xl: '2rem',
+        }}
+      >
+        <Heading
+          fontSize={{
+            sm: '0.4rem',
+            md: '0.8rem',
+            lg: '1.2rem',
+            xl: '1.6rem',
+          }}
+        >
           {title}
         </Heading>
-        <Box>
+        <Box
+          fontSize={{
+            sm: '0.2rem',
+            md: '0.4rem',
+            lg: '0.6rem',
+            xl: '1rem',
+          }}
+        >
           {subtitle}
         </Box>
 
         <Flex justifyContent="flex-end">
           <Button
-            fontSize="1rem"
-            p="0.6rem 0.8rem"
+            fontSize={{
+              sm: '0.2rem',
+              md: '0.4rem',
+              lg: '0.8rem',
+              xl: '1rem',
+            }}
+            p={{
+              md: '0.1rem 0.8rem',
+              lg: '0.1rem 0.8rem',
+              xl: '0.6rem 0.8rem',
+            }}
             borderRadius="100px"
             rightIcon={<BiRightArrowAlt />}
             as="a"

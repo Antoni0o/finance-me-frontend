@@ -13,20 +13,52 @@ export const Transactions = () => {
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={10}>
       <GridItem
-        h="10rem"
-        p="1rem"
+        h={{
+          sm: '3rem',
+          md: '5rem',
+          lg: '7rem',
+          xl: '10rem',
+        }}
+        p={{
+          sm: '0.2rem',
+          md: '0.4rem',
+          lg: '0.6rem',
+          xl: '1rem',
+        }}
         bg={colorMode == 'dark' ? 'dark.200' : 'green.150'}
         borderRadius="xl"
         boxShadow="xl"
       >
         <Heading
           color={colorMode == 'dark' ? 'light.100' : 'dark.100'}
-          fontSize="x-large"
+          fontSize={{
+            sm: 'medium',
+            md: 'large',
+            lg: 'larger',
+            xl: 'x-large',
+          }}
         >
           ENTRADAS
         </Heading>
-        <Flex mt="1.5rem" alignItems="center" justifyContent="space-between">
-          <Heading fontSize="3rem">R$ XXXX,XX</Heading>
+        <Flex
+          mt={{
+            md: '0.5rem',
+            lg: '1rem',
+            xl: '1.5rem',
+          }}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Heading
+            fontSize={{
+              sm: '1.2rem',
+              md: '1.4rem',
+              lg: '1.8rem',
+              xl: '3rem',
+            }}
+          >
+            R$ XXXX,XX
+          </Heading>
           <IconButton
             aria-label="Esconder valor"
             variant="ghost"
@@ -40,20 +72,52 @@ export const Transactions = () => {
         </Flex>
       </GridItem>
       <GridItem
-        h="10rem"
-        p="1rem"
+        h={{
+          sm: '3rem',
+          md: '5rem',
+          lg: '7rem',
+          xl: '10rem',
+        }}
+        p={{
+          sm: '0.2rem',
+          md: '0.4rem',
+          lg: '0.6rem',
+          xl: '1rem',
+        }}
         bg={colorMode == 'dark' ? 'dark.200' : 'green.150'}
         borderRadius="xl"
         boxShadow="xl"
       >
         <Heading
           color={colorMode == 'dark' ? 'light.100' : 'dark.100'}
-          fontSize="x-large"
+          fontSize={{
+            sm: 'medium',
+            md: 'large',
+            lg: 'larger',
+            xl: 'x-large',
+          }}
         >
           SAÍDAS
         </Heading>
-        <Flex mt="1.5rem" alignItems="center" justifyContent="space-between">
-          <Heading fontSize="3rem">R$ XXXX,XX</Heading>
+        <Flex
+          mt={{
+            md: '0.5rem',
+            lg: '1rem',
+            xl: '1.5rem',
+          }}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Heading
+            fontSize={{
+              sm: '1.2rem',
+              md: '1.4rem',
+              lg: '1.8rem',
+              xl: '3rem',
+            }}
+          >
+            R$ XXXX,XX
+          </Heading>
           <IconButton
             aria-label="Esconder valor"
             variant="ghost"
@@ -67,20 +131,52 @@ export const Transactions = () => {
         </Flex>
       </GridItem>
       <GridItem
-        h="10rem"
-        p="1rem"
+        h={{
+          sm: '3rem',
+          md: '5rem',
+          lg: '7rem',
+          xl: '10rem',
+        }}
+        p={{
+          sm: '0.2rem',
+          md: '0.4rem',
+          lg: '0.6rem',
+          xl: '1rem',
+        }}
         bg={colorMode == 'dark' ? 'dark.200' : 'green.150'}
         borderRadius="xl"
         boxShadow="xl"
       >
         <Heading
           color={colorMode == 'dark' ? 'light.100' : 'dark.100'}
-          fontSize="x-large"
+          fontSize={{
+            sm: 'medium',
+            md: 'large',
+            lg: 'larger',
+            xl: 'x-large',
+          }}
         >
           SALDO
         </Heading>
-        <Flex mt="1.5rem" alignItems="center" justifyContent="space-between">
-          <Heading fontSize="3rem">R$ XXXX,XX</Heading>
+        <Flex
+          mt={{
+            md: '0.5rem',
+            lg: '1rem',
+            xl: '1.5rem',
+          }}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Heading
+            fontSize={{
+              sm: '1.2rem',
+              md: '1.4rem',
+              lg: '1.8rem',
+              xl: '3rem',
+            }}
+          >
+            R$ XXXX,XX
+          </Heading>
           <IconButton
             aria-label="Esconder valor"
             variant="ghost"
