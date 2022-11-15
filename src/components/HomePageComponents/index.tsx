@@ -16,17 +16,19 @@ import { Transactions } from './transactions';
 
 export const HomePageContent = () => {
   const { colorMode } = useColorMode();
-  const [ gridArea, setGridArea ] = useState("10% 90%");
+  const [ gridAreaLg, setGridAreaLg ] = useState("10% 90%");
+  const [ gridAreaMd, setGridAreaMd ] = useState("15% 85%");
 
   return (
-    <Grid gridTemplateColumns={gridArea} w="100%" transition="0.2s">
+    <Grid gridTemplateColumns={['100%', '100%', gridAreaMd, gridAreaLg]} gridTemplateRows={['10% 90%', '10% 90%', '100%', '100%']} w="100%" transition="0.2s">
       <GridItem
-        margin="2rem"
         onMouseEnter={() => {
-          setGridArea("30% 70%");
+          setGridAreaLg("30% 70%");
+          setGridAreaMd("30% 70%");
         }}
         onMouseLeave={() => {
-          setGridArea("10% 90%");
+          setGridAreaLg("10% 90%");
+          setGridAreaMd("15% 85%");
         }}
       >
         <LeftBar />
@@ -49,6 +51,7 @@ export const HomePageContent = () => {
             lg: "1.4rem",
             xl: "2rem"
           }}
+          flexDirection={['column', 'column', 'row', 'row']}
         >
           <Button
             fontSize="2rem"
@@ -66,22 +69,18 @@ export const HomePageContent = () => {
         </Flex>
         <Flex
           flexDir="column"
+          marginTop={['1rem', '0', '0', '0']}
         >
           <Heading>Notícias</Heading>
           <Box 
             bg={colorMode === "dark" ? "dark.200" : "green.150"} 
             w="100%" 
-            h={{
-              sm: "7rem",
-              md: "16rem",
-              lg: "20rem",
-              xl:"33rem"
-            }}
             borderRadius="20px" 
             p="1rem"
             boxShadow="xl" 
             display="flex" 
             alignItems="center"
+            justifyContent={['center', 'center', 'flex-start', 'flex-start']}
           >
            <NewsCard
             imageUrl="https://ichef.bbci.co.uk/news/800/cpsprodpb/1671E/production/_127243919_gettyimages-1130747337.jpg.webp"
@@ -92,7 +91,7 @@ export const HomePageContent = () => {
           </Box>
           <Flex
           w="100%"
-          justifyContent="flex-end"
+          justifyContent={['center', 'center', 'flex-end', 'flex-end']}
           mt={{
             sm: "1rem",
             md: "1.4rem",
@@ -101,7 +100,9 @@ export const HomePageContent = () => {
           }}
         >
           <Button
+            marginBottom={['1rem', '1rem', '0', '0']}
             fontSize="2rem"
+            width={['100%', '100%', 'auto', 'auto']}
             p={{
               sm: "0.6rem 1.2rem",
               md: "1rem 1.4rem",

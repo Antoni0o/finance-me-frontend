@@ -27,8 +27,8 @@ export const NewsCard = ({
     <Box
       bg={colorMode === 'dark' ? 'dark.300' : 'green.100'}
       w={{
-        sm: '8rem',
-        md: '12rem',
+        sm: '20rem',
+        md: '14rem',
         lg: '14rem',
         xl: '20rem',
       }}
@@ -39,8 +39,8 @@ export const NewsCard = ({
         borderRadius="20px 20px 0 0"
         w="100%"
         h={{
-          sm: '4rem',
-          md: '6rem',
+          sm: '10rem',
+          md: '8rem',
           lg: '8rem',
           xl: '10rem',
         }}
@@ -48,16 +48,16 @@ export const NewsCard = ({
       />
       <Box
         p={{
-          sm: '0.2rem',
-          md: '0.6rem',
+          sm: '2rem',
+          md: '0.8rem',
           lg: '0.8rem',
           xl: '2rem',
         }}
       >
         <Heading
           fontSize={{
-            sm: '0.4rem',
-            md: '0.8rem',
+            sm: '1.6rem',
+            md: '1.2rem',
             lg: '1.2rem',
             xl: '1.6rem',
           }}
@@ -66,8 +66,8 @@ export const NewsCard = ({
         </Heading>
         <Box
           fontSize={{
-            sm: '0.2rem',
-            md: '0.4rem',
+            sm: '1rem',
+            md: '0.6rem',
             lg: '0.6rem',
             xl: '1rem',
           }}
@@ -78,13 +78,13 @@ export const NewsCard = ({
         <Flex justifyContent="flex-end">
           <Button
             fontSize={{
-              sm: '0.2rem',
-              md: '0.4rem',
+              sm: '1rem',
+              md: '0.8rem',
               lg: '0.8rem',
               xl: '1rem',
             }}
             p={{
-              md: '0.1rem 0.8rem',
+              md: '0.6rem 0.8rem',
               lg: '0.1rem 0.8rem',
               xl: '0.6rem 0.8rem',
             }}

@@ -11,17 +11,17 @@ import { AiOutlineEyeInvisible } from 'react-icons/ai';
 export const Transactions = () => {
   const { colorMode } = useColorMode();
   return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={10}>
+    <Grid templateColumns={["100%", "100%", "repeat(3, 1fr)", "repeat(3, 1fr)"]} templateRows={["repeat(3, 1fr)", "repeat(3, 1fr)", "100%", "100%"]} gap={10}>
       <GridItem
         h={{
-          sm: '3rem',
-          md: '5rem',
+          sm: '7rem',
+          md: '7rem',
           lg: '7rem',
           xl: '10rem',
         }}
         p={{
-          sm: '0.2rem',
-          md: '0.4rem',
+          sm: '1rem',
+          md: '0.6rem',
           lg: '0.6rem',
           xl: '1rem',
         }}
@@ -42,7 +42,7 @@ export const Transactions = () => {
         </Heading>
         <Flex
           mt={{
-            md: '0.5rem',
+            md: '1rem',
             lg: '1rem',
             xl: '1.5rem',
           }}
@@ -51,8 +51,8 @@ export const Transactions = () => {
         >
           <Heading
             fontSize={{
-              sm: '1.2rem',
-              md: '1.4rem',
+              sm: '2rem',
+              md: '1.6rem',
               lg: '1.8rem',
               xl: '3rem',
             }}
@@ -73,14 +73,14 @@ export const Transactions = () => {
       </GridItem>
       <GridItem
         h={{
-          sm: '3rem',
-          md: '5rem',
+          sm: '7rem',
+          md: '7rem',
           lg: '7rem',
           xl: '10rem',
         }}
         p={{
-          sm: '0.2rem',
-          md: '0.4rem',
+          sm: '1rem',
+          md: '0.6rem',
           lg: '0.6rem',
           xl: '1rem',
         }}
@@ -101,7 +101,7 @@ export const Transactions = () => {
         </Heading>
         <Flex
           mt={{
-            md: '0.5rem',
+            md: '1rem',
             lg: '1rem',
             xl: '1.5rem',
           }}
@@ -110,8 +110,8 @@ export const Transactions = () => {
         >
           <Heading
             fontSize={{
-              sm: '1.2rem',
-              md: '1.4rem',
+              sm: '2rem',
+              md: '1.6rem',
               lg: '1.8rem',
               xl: '3rem',
             }}
@@ -132,14 +132,14 @@ export const Transactions = () => {
       </GridItem>
       <GridItem
         h={{
-          sm: '3rem',
-          md: '5rem',
+          sm: '7rem',
+          md: '7rem',
           lg: '7rem',
           xl: '10rem',
         }}
         p={{
-          sm: '0.2rem',
-          md: '0.4rem',
+          sm: '1rem',
+          md: '0.6rem',
           lg: '0.6rem',
           xl: '1rem',
         }}
@@ -160,7 +160,7 @@ export const Transactions = () => {
         </Heading>
         <Flex
           mt={{
-            md: '0.5rem',
+            md: '1rem',
             lg: '1rem',
             xl: '1.5rem',
           }}
@@ -169,8 +169,8 @@ export const Transactions = () => {
         >
           <Heading
             fontSize={{
-              sm: '1.2rem',
-              md: '1.4rem',
+              sm: '2rem',
+              md: '1.6rem',
               lg: '1.8rem',
               xl: '3rem',
             }}
