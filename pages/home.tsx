@@ -1,4 +1,4 @@
-import { Center, Container, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { HomePageContent } from "../src/components/HomePageComponents";
 

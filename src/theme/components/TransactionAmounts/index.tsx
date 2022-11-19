@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 
-export const Transactions = () => {
+export const TransactionAmounts = () => {
   const { colorMode } = useColorMode();
   return (
     <Grid templateColumns={["100%", "100%", "repeat(3, 1fr)", "repeat(3, 1fr)"]} templateRows={["repeat(3, 1fr)", "repeat(3, 1fr)", "100%", "100%"]} gap={10}>

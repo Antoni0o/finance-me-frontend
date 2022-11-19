@@ -34,14 +34,23 @@ export const LeftBar = () => {
       >
         <Flex
           margin='1rem'
-        >
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%"
+          height="3rem"
+        > 
+          <Image
+            src={Logo}
+            width="48px"
+            height="48px"
+          ></Image>
           <Image
             src={colorMode === 'dark' ? MenuButtonLight : MenuButtonDark}
             onClick={() => {
               setIsMobileLeftBarOpen(true);
             }}
-            width="32px"
-            height="32px"
+            width="40%"
+            height="40%"
           ></Image>
         </ Flex >
         {isMobileLeftBarOpen && (
@@ -304,11 +313,14 @@ export const LeftBar = () => {
                 </Button>
               </>
             ) : (
-              <>
+              <Flex 
+                justifyContent="center" 
+                flexDirection="column"
+                alignItems="center"
+              >
                 <IconButton
                   aria-label="Home"
                   fontSize={["1rem", "1rem", "1rem", "2rem"]}
-                  mx={["0rem", "0rem", "1rem", "2rem"]}
                   variant="ghost"
                   color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
                   icon={<AiOutlineHome />}
@@ -317,7 +329,6 @@ export const LeftBar = () => {
                   aria-label="Gerenciamento"
                   fontSize={["1rem", "1rem", "1rem", "2rem"]}
                   mt="1rem"
-                  mx={["0rem", "0rem", "1rem", "2rem"]}
                   variant="ghost"
                   color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
                   icon={<BiWallet />}
@@ -335,7 +346,6 @@ export const LeftBar = () => {
                   aria-label="Tema"
                   fontSize={["1rem", "1rem", "1rem", "2rem"]}
                   mt="1rem"
-                  mx={["0rem", "0rem", "1rem", "2rem"]}
                   variant="ghost"
                   color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
                   icon={colorMode === 'dark' ? <BsSunFill /> : <IoMdMoon />}
@@ -354,12 +364,11 @@ export const LeftBar = () => {
                   aria-label="Sair"
                   fontSize={["1rem", "1rem", "1rem", "2rem"]}
                   mt="1rem"
-                  mx={["0rem", "0rem", "1rem", "2rem"]}
                   variant="ghost"
                   color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
                   icon={<BiExit />}
                 ></IconButton>
-              </>
+              </ Flex>
             )}
           </Flex>
         </Box>

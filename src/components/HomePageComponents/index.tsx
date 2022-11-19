@@ -11,13 +11,13 @@ import { useState } from 'react';
 import { BiRightArrowAlt } from 'react-icons/bi';
 import { LeftBar } from '../../theme/components/LeftBar';
 import { NewsCard } from './newsCard';
-import { Transactions } from './transactions';
+import { TransactionAmounts } from '../../theme/components/TransactionAmounts';
 
 
 export const HomePageContent = () => {
   const { colorMode } = useColorMode();
   const [ gridAreaLg, setGridAreaLg ] = useState("10% 90%");
-  const [ gridAreaMd, setGridAreaMd ] = useState("15% 85%");
+  const [ gridAreaMd, setGridAreaMd ] = useState("20% 80%");
 
   return (
     <Grid gridTemplateColumns={['100%', '100%', gridAreaMd, gridAreaLg]} gridTemplateRows={['10% 90%', '10% 90%', '100%', '100%']} w="100%" transition="0.2s">
@@ -28,7 +28,7 @@ export const HomePageContent = () => {
         }}
         onMouseLeave={() => {
           setGridAreaLg("10% 90%");
-          setGridAreaMd("15% 85%");
+          setGridAreaMd("20% 80%");
         }}
       >
         <LeftBar />
@@ -41,7 +41,7 @@ export const HomePageContent = () => {
           xl: "2rem"
         }}
       >
-        <Transactions />
+        <TransactionAmounts />
         <Flex
           w="100%"
           justifyContent="flex-end"
@@ -54,7 +54,7 @@ export const HomePageContent = () => {
           flexDirection={['column', 'column', 'row', 'row']}
         >
           <Button
-            fontSize="2rem"
+            fontSize="1.6rem"
             p={{
               sm: "0.6rem 1.2rem",
               md: "1rem 1.4rem",
@@ -101,7 +101,7 @@ export const HomePageContent = () => {
         >
           <Button
             marginBottom={['1rem', '1rem', '0', '0']}
-            fontSize="2rem"
+            fontSize="1.6rem"
             width={['100%', '100%', 'auto', 'auto']}
             p={{
               sm: "0.6rem 1.2rem",
