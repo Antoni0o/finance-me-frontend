@@ -12,12 +12,14 @@ import { BiRightArrowAlt } from 'react-icons/bi';
 import { LeftBar } from '../../theme/components/LeftBar';
 import { NewsCard } from './newsCard';
 import { TransactionAmounts } from '../../theme/components/TransactionAmounts';
+import { useRouter } from 'next/router';
 
 
 export const HomePageContent = () => {
   const { colorMode } = useColorMode();
   const [ gridAreaLg, setGridAreaLg ] = useState("10% 90%");
   const [ gridAreaMd, setGridAreaMd ] = useState("20% 80%");
+  const router = useRouter();
 
   return (
     <Grid gridTemplateColumns={['100%', '100%', gridAreaMd, gridAreaLg]} gridTemplateRows={['10% 90%', '10% 90%', '100%', '100%']} w="100%" transition="0.2s">
@@ -63,6 +65,9 @@ export const HomePageContent = () => {
             }}
             borderRadius="100px"
             rightIcon={<BiRightArrowAlt />}
+            onClick={() => {
+              router.push('/management');
+            }}
           >
           Gerenciar
         </Button>
