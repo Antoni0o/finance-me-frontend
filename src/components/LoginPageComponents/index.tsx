@@ -128,24 +128,6 @@ export const LoginContent = () => {
             focusBorderColor="green.300"
           />
         </FormControl>
-        <Text
-          align="right"
-          opacity="66%"
-          mb={{
-            sm: '0.4rem',
-            md: '0.6rem',
-            lg: '0.6rem',
-            xl: '0.8rem',
-          }}
-        >
-          Esqueceu A Senha?
-          <Link
-            onClick={onOpen}
-            color="green.200"
-          >
-            &nbsp;Clique Aqui!
-          </Link>
-        </Text>
 
         <Button
           isLoading={isLoading}
@@ -193,49 +175,7 @@ export const LoginContent = () => {
             &nbsp;Cadastre-se
           </Link>
         </Text>
-        <Flex gap="0.5rem" alignItems="center" mb="0.6rem">
-          <Divider
-            color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
-            opacity="66%"
-          />
-          <Text opacity="66%">Ou</Text>
-          <Divider
-            color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
-            opacity="66%"
-          />
-        </Flex>
-        <Flex w="100%" alignItems="center" justifyContent="center">
-          <Link
-            p="0.6rem"
-            borderRadius="50px"
-            border="1px solid"
-            borderColor={colorMode === 'dark' ? 'light.200' : 'dark.200'}
-            opacity="50%"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push('/google-auth');
-            }}
-          >
-            <GrGoogle color={colorMode === 'dark' ? 'light.200' : 'dark.200'} />
-          </Link>
-        </Flex>
       </RegistrationContainer>
-
-      <Modal
-        isCentered
-        motionPreset="scale"
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay
-          bg='none'
-          backdropFilter='auto'
-          backdropBlur='10px'
-        />
-        <ForgotPasswordModalContent />
-      </Modal>
     </>
   );
 };

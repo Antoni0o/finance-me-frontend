@@ -2,10 +2,10 @@ import { Flex } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { ManagementPageContent } from '../src/components/ManagementPageComponents';
+import { NewsPageContent } from '../src/components/NewsPageComponents';
 import { useAuth } from '../src/hooks/useAuth';
 
-const ManagementPage: NextPage = () => {
+const NewsPage: NextPage = () => {
   const { signed } = useAuth();
   const router = useRouter();
 
@@ -27,9 +27,9 @@ const ManagementPage: NextPage = () => {
       w="100vw"
       h="100vh"
     >
-      <ManagementPageContent />
+      <NewsPageContent />
     </Flex>
   );
 };
 
-export default ManagementPage;
+export default NewsPage;

@@ -30,7 +30,12 @@ export const LeftBar = () => {
 
   return (
     <>
-      <Flex width="100%" display={['flex', 'flex', 'none', 'none']}>
+      <Flex width="100%" display={{
+        sm: 'flex',
+        md: 'flex',
+        lg: 'none',
+        xl: 'none'
+      }}>
         <Flex
           margin="1rem"
           justifyContent="space-between"
@@ -140,6 +145,9 @@ export const LeftBar = () => {
                   bg: 'green.200',
                 }}
                 leftIcon={<BiNews />}
+                onClick={() => {
+                  router.push('/news');
+                }}
               >
                 Notícias
               </Button>
@@ -192,7 +200,12 @@ export const LeftBar = () => {
           </>
         )}
       </Flex>
-      <Flex display={['none', 'none', 'flex', 'flex']} margin="2rem">
+      <Flex display={{
+        sm: 'none',
+        md: 'none',
+        lg: 'flex',
+        xl: 'flex'
+      }} margin="2rem">
         <Box
           bg={colorMode === 'dark' ? 'dark.200' : 'green.150'}
           w="100%"
@@ -288,6 +301,9 @@ export const LeftBar = () => {
                     bg: 'green.200',
                   }}
                   leftIcon={<BiNews />}
+                  onClick={() => {
+                    router.push('/news');
+                  }}
                 >
                   Notícias
                 </Button>
