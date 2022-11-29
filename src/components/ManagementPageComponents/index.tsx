@@ -36,16 +36,15 @@ export const ManagementPageContent = () => {
   const [gridAreaLg, setGridAreaLg] = useState('4% 96%');
   const [gridAreaMd, setGridAreaMd] = useState('6% 94%');
   const [transactions, setTransactions] = useState([]);
-  const {user} = useAuth();
+  const { user } = useAuth();
   const createTransactionModal = useDisclosure();
   const createTransactionModalRef = useRef();
-  const router = useRouter();
 
   useEffect(() => {
     api.get(`/users/${user.id}`).then((res) => {
       setTransactions(res.data.transactions);
     });
-  }, [user]);
+  }, []);
 
   return (
     <>
@@ -63,9 +62,14 @@ export const ManagementPageContent = () => {
           xl: '100%',
         }}
         w="100%"
-        p="2rem"
+        p={{
+          sm: '0',
+          md: '0',
+          lg: '2rem'
+        }}
         gap="1rem"
         transition="0.2s"
+        justifyContent='center'
       >
         <GridItem
           onMouseEnter={() => {
@@ -79,7 +83,7 @@ export const ManagementPageContent = () => {
         >
           <LeftBar />
         </GridItem>
-        <GridItem>
+        <GridItem m={{sm: "2rem", lg: "0"}}>
           <TransactionAmounts
             userId={user.id}
           />
@@ -251,12 +255,12 @@ export const ManagementPageContent = () => {
             <Button
               variant="solid"
               onClick={() => {
-                window.location.reload();
-
                 api.post('/transactions', {
                   description: transactionDescription,
                   amount: Number(transactionAmount),
                   type: transactionType,
+                }).then(() => {
+                  window.location.reload();
                 });
               }}
             >

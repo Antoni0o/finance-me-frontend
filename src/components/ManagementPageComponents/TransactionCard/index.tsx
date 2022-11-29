@@ -30,9 +30,14 @@ interface ITransactionCardProps {
   description: string;
   type: string;
   amount: string;
-} 
+}
 
-export const TransactionCard = ({amount, description, type, id}: ITransactionCardProps) => {
+export const TransactionCard = ({
+  amount,
+  description,
+  type,
+  id,
+}: ITransactionCardProps) => {
   const { colorMode } = useColorMode();
   const deleteTransactionModal = useDisclosure();
   const deleteTransactionRef = useRef();
@@ -62,16 +67,29 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
             >
               {description}
             </Heading>
-            <Heading
-              fontSize={{
-                sm: '1rem',
-                md: '1.2rem',
-                lg: '1.2rem',
-                xl: '1.6rem',
-              }}
-            >
-              {type}
-            </Heading>
+            {type === 'expense' ? (
+              <Heading
+                fontSize={{
+                  sm: '1rem',
+                  md: '1.2rem',
+                  lg: '1.2rem',
+                  xl: '1.6rem',
+                }}
+              >
+                Saída
+              </Heading>
+            ) : (
+              <Heading
+                fontSize={{
+                  sm: '1rem',
+                  md: '1.2rem',
+                  lg: '1.2rem',
+                  xl: '1.6rem',
+                }}
+              >
+                Entrada
+              </Heading>
+            )}
             <Heading
               fontSize={{
                 sm: '1rem',
@@ -98,7 +116,7 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
               bg: 'none',
             }}
             onClick={deleteTransactionModal.onOpen}
-            />
+          />
         </Flex>
       </Box>
       <Accordion allowToggle display={['block', 'block', 'none', 'none']}>
@@ -108,9 +126,14 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
         >
           <h2>
             <AccordionButton>
-              <Box maxWidth="100%" flex="1" textAlign="left" whiteSpace="nowrap"
-              overflow="hidden"
-              textOverflow="ellipsis">
+              <Box
+                maxWidth="100%"
+                flex="1"
+                textAlign="left"
+                whiteSpace="nowrap"
+                overflow="hidden"
+                textOverflow="ellipsis"
+              >
                 {description}
               </Box>
               <AccordionIcon />
@@ -122,9 +145,7 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
               alignItems="flex-end"
               justifyContent="space-around"
             >
-              <Flex
-                flexDirection="column"
-              >
+              <Flex flexDirection="column">
                 <Heading
                   fontSize={{
                     sm: '1rem',
@@ -146,9 +167,7 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
                   {type === 'expense' ? 'Saída' : 'Entrada'}
                 </Heading>
               </Flex>
-              <Flex
-                flexDirection="column"
-              >
+              <Flex flexDirection="column">
                 <Heading
                   fontSize={{
                     sm: '1rem',
@@ -205,7 +224,11 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
             <Text>Tem certeza que deseja deletar a transação?</Text>
           </ModalBody>
           <ModalFooter>
-            <Button variant="outline" mr={3} onClick={deleteTransactionModal.onClose}>
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={deleteTransactionModal.onClose}
+            >
               Cancelar
             </Button>
             <Button
@@ -216,8 +239,9 @@ export const TransactionCard = ({amount, description, type, id}: ITransactionCar
                 bg: 'red.100',
               }}
               onClick={() => {
-                window.location.reload();
-                api.delete(`/transactions/${id}`);
+                api.delete(`/transactions/${id}`).then(() => {
+                  window.location.reload();
+                });
               }}
             >
               Sim, Deletar

@@ -1,34 +1,36 @@
 import { Flex } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { userAgent } from 'next/server';
 import { useEffect } from 'react';
 import { HomePageContent } from '../src/components/HomePageComponents';
 import { useAuth } from '../src/hooks/useAuth';
 
-const HomePage: NextPage = () => {
-  const router = useRouter();
+interface IHomePageProps {
+  userId: string;
+}
 
-  useEffect(() => {
-    const token = localStorage.getItem("@financeme:token");
-    if(!token) {
-      router.push('/');
-    }
-  }, []);
+const HomePage: NextPage = ({ userId }: IHomePageProps) => {
+  const { user } = useAuth();
 
   return (
-    <Flex
-      overflowX="hidden"
-      overflowY={{
-        sm: 'scroll',
-        md: 'scroll',
-        lg: 'hidden',
-        xl: 'hidden',
-      }}
-      w="100vw"
-      h="100vh"
-    >
-      <HomePageContent />
-    </Flex>
+    <>
+      {user?.id && (
+        <Flex
+          overflowX="hidden"
+          overflowY={{
+            sm: 'scroll',
+            md: 'scroll',
+            lg: 'hidden',
+            xl: 'hidden',
+          }}
+          w="100vw"
+          h="100vh"
+        >
+          <HomePageContent userId={userId} />
+        </Flex>
+      )}
+    </>
   );
 };
 

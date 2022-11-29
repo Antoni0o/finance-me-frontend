@@ -25,8 +25,8 @@ export const TransactionAmounts = ({
   useEffect(() => {
     api.get(`/amounts/${userId}`).then((res) => {
       setAmounts(res.data);
-    });
-  }, []);
+    }); 
+  }, [userId]);
 
   return (
     <Grid

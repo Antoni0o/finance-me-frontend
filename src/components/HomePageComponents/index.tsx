@@ -7,7 +7,7 @@ import {
   Heading,
   useColorMode,
 } from '@chakra-ui/react';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiRightArrowAlt } from 'react-icons/bi';
 import { LeftBar } from '../../theme/components/LeftBar';
 import { NewsCard } from '../../theme/components/NewsCard';
@@ -16,12 +16,22 @@ import { useRouter } from 'next/router';
 import { api } from '../../api';
 import { useAuth } from '../../hooks/useAuth';
 
-export const HomePageContent = () => {
+
+interface IUserResponse {
+  id: string;
+  email: string;
+}
+
+interface IPageProps {
+  userId: string;
+}
+
+export const HomePageContent = ({userId}: IPageProps) => {
   const { colorMode } = useColorMode();
   const [gridAreaLg, setGridAreaLg] = useState('4% 96%');
   const [gridAreaMd, setGridAreaMd] = useState('6% 94%');
   const router = useRouter();
-  const { user } = useAuth();
+  const {user} = useAuth();
 
   return (
     <Grid
@@ -38,9 +48,14 @@ export const HomePageContent = () => {
         xl: '100%',
       }}
       w="100%"
-      p="2rem"
+      p={{
+        sm: '0',
+        md: '0',
+        lg: '2rem'
+      }}
       gap="1rem"
       transition="0.2s"
+      justifyContent='center'
     >
       <GridItem
         onMouseEnter={() => {
@@ -54,7 +69,7 @@ export const HomePageContent = () => {
       >
         <LeftBar />
       </GridItem>
-      <GridItem>
+      <GridItem m={{sm: "2rem", lg: "0"}}>
         <TransactionAmounts
           userId={user.id}
         />

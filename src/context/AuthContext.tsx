@@ -1,4 +1,3 @@
-import { useToast } from "@chakra-ui/toast";
 import { useRouter } from "next/router";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -12,9 +11,8 @@ type AuxProps = {
 type AuthContextData = {
   signed: boolean;
   user: User | null;
-  getUserData: () => User;
-  signIn: (email: string, password: string) => Promise<void>;
-  signOut: () => void;
+  signIn(email: string, password: string): Promise<void>;
+  signOut(): void;
 }
 
 type AuthResponse = {
@@ -27,41 +25,36 @@ type AuthResponse = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export function AuthProvider(props: AuxProps) {
+export const AuthProvider: React.FC = ({children}: AuxProps) => {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
-  const toast = useToast();
+
+  useEffect(() => {
+    const storagedToken = sessionStorage.getItem('@financeme:token');
+    const storagedUser = sessionStorage.getItem('@financeme:user');
+
+    if(storagedToken && storagedUser) {
+      setUser(JSON.parse(storagedUser));
+      api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
+    }
+  }, []);
 
   async function signIn(email: string, password: string) {
-    await api.post<AuthResponse>('/auth/login', {
+    const res = await api.post<AuthResponse>('/auth/login', {
       email,
       password
     })
-    .then(async (res) => {
-      const { user, token } = res.data;
 
-      localStorage.setItem('@financeme:token', token);
+    const { user, token } = res.data;
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
+    sessionStorage.setItem('@financeme:token', token);
+    sessionStorage.setItem('@financeme:user', JSON.stringify(user));
 
-      await api.get(`/users/${user.id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then((res) => {
-        setUser(res.data);
-      }); 
 
-      router.push('/home');
-    })
-    .catch((err) => {
-      toast({
-        title: 'Email e/ou senha incorreto(s)!',
-        status: 'error',
-        isClosable: true,
-        position: 'top-right'
-      })
-    });
+    setUser(user);
+
+    router.push('/home');
   }
 
   function signOut() {
@@ -69,28 +62,13 @@ export function AuthProvider(props: AuxProps) {
 
     setUser(null);
 
-    localStorage.removeItem('@todoapp:token');
+    sessionStorage.removeItem('@financeme:token');
+    sessionStorage.removeItem('@financeme:user')
   }
-
-  function getUserData() {
-    return user;
-  }
-
-  useEffect(() => {
-    const token = localStorage.getItem('@todoapp:token');
-
-    if(token && token != 'undefined') {
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
-
-      api.get('/users/token').then(res => {
-        setUser(res.data.result.user);
-      });
-    }
-  }, []);
 
   return (
-    <AuthContext.Provider value={{ signed: Boolean(user), user, getUserData, signIn, signOut }}>
-      {props.children}
+    <AuthContext.Provider value={{ signed: Boolean(user), user, signIn, signOut }}>
+      {children}
     </AuthContext.Provider>
   )
 }
