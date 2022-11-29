@@ -1,24 +1,40 @@
-import {
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  IconButton,
-  useColorMode,
-} from '@chakra-ui/react';
-import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import { Flex, Grid, GridItem, Heading, useColorMode } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { api } from '../../../api';
 
-export const TransactionAmounts = () => {
+interface ITransactionAmountsProps {
+  userId: string
+}
+
+export interface IApiResponse {
+  income: string;
+  expense: string;
+  amount: string;
+}
+
+export const TransactionAmounts = ({
+  userId
+}: ITransactionAmountsProps) => {
   const { colorMode } = useColorMode();
+  const [amounts, setAmounts] = useState<IApiResponse>({
+    amount: 'R$ XXX,XX',
+    income: 'R$ XXX,XX',
+    expense: 'R$ XXX,XX',
+  });
+
+  useEffect(() => {
+    api.get(`/amounts/${userId}`).then((res) => {
+      setAmounts(res.data);
+    });
+  }, []);
+
   return (
-    <Grid templateColumns={["100%", "100%", "repeat(3, 1fr)", "repeat(3, 1fr)"]} templateRows={["repeat(3, 1fr)", "repeat(3, 1fr)", "100%", "100%"]} gap={10}>
+    <Grid
+      templateColumns={['100%', '100%', 'repeat(3, 1fr)', 'repeat(3, 1fr)']}
+      templateRows={['repeat(3, 1fr)', 'repeat(3, 1fr)', '100%', '100%']}
+      gap={10}
+    >
       <GridItem
-        h={{
-          sm: '7rem',
-          md: '7rem',
-          lg: '7rem',
-          xl: '10rem',
-        }}
         p={{
           sm: '1rem',
           md: '0.6rem',
@@ -51,33 +67,18 @@ export const TransactionAmounts = () => {
         >
           <Heading
             fontSize={{
-              sm: '2rem',
+              sm: '1.6rem',
               md: '1.6rem',
               lg: '1.8rem',
               xl: '3rem',
             }}
+            maxWidth="100%"
           >
-            R$ XXXX,XX
+            {amounts.income}
           </Heading>
-          <IconButton
-            aria-label="Esconder valor"
-            variant="ghost"
-            w="3rem"
-            h="3rem"
-            borderRadius="50px"
-            padding="0.4rem"
-            fontSize="3rem"
-            icon={<AiOutlineEyeInvisible />}
-          ></IconButton>
         </Flex>
       </GridItem>
       <GridItem
-        h={{
-          sm: '7rem',
-          md: '7rem',
-          lg: '7rem',
-          xl: '10rem',
-        }}
         p={{
           sm: '1rem',
           md: '0.6rem',
@@ -110,33 +111,18 @@ export const TransactionAmounts = () => {
         >
           <Heading
             fontSize={{
-              sm: '2rem',
+              sm: '1.6rem',
               md: '1.6rem',
               lg: '1.8rem',
               xl: '3rem',
             }}
+            maxWidth="100%"
           >
-            R$ XXXX,XX
+            {amounts.expense}
           </Heading>
-          <IconButton
-            aria-label="Esconder valor"
-            variant="ghost"
-            w="3rem"
-            h="3rem"
-            borderRadius="50px"
-            padding="0.4rem"
-            fontSize="3rem"
-            icon={<AiOutlineEyeInvisible />}
-          ></IconButton>
         </Flex>
       </GridItem>
       <GridItem
-        h={{
-          sm: '7rem',
-          md: '7rem',
-          lg: '7rem',
-          xl: '10rem',
-        }}
         p={{
           sm: '1rem',
           md: '0.6rem',
@@ -169,24 +155,15 @@ export const TransactionAmounts = () => {
         >
           <Heading
             fontSize={{
-              sm: '2rem',
+              sm: '1.6rem',
               md: '1.6rem',
               lg: '1.8rem',
               xl: '3rem',
             }}
+            maxWidth="100%"
           >
-            R$ XXXX,XX
+            {amounts.amount}
           </Heading>
-          <IconButton
-            aria-label="Esconder valor"
-            variant="ghost"
-            w="3rem"
-            h="3rem"
-            borderRadius="50px"
-            padding="0.4rem"
-            fontSize="3rem"
-            icon={<AiOutlineEyeInvisible />}
-          ></IconButton>
         </Flex>
       </GridItem>
     </Grid>

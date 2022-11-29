@@ -12,6 +12,7 @@ type AuxProps = {
 type AuthContextData = {
   signed: boolean;
   user: User | null;
+  getUserData: () => User;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => void;
 }
@@ -37,7 +38,6 @@ export function AuthProvider(props: AuxProps) {
       password
     })
     .then(async (res) => {
-      console.log(res.data);
       const { user, token } = res.data;
 
       localStorage.setItem('@financeme:token', token);
@@ -72,20 +72,24 @@ export function AuthProvider(props: AuxProps) {
     localStorage.removeItem('@todoapp:token');
   }
 
+  function getUserData() {
+    return user;
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('@todoapp:token');
 
-    if(token && token !== 'undefined') {
+    if(token && token != 'undefined') {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-      api.get('/user').then(res => {
+      api.get('/users/token').then(res => {
         setUser(res.data.result.user);
       });
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signed: Boolean(user), user, signIn, signOut }}>
+    <AuthContext.Provider value={{ signed: Boolean(user), user, getUserData, signIn, signOut }}>
       {props.children}
     </AuthContext.Provider>
   )

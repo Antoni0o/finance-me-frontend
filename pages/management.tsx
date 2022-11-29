@@ -6,14 +6,14 @@ import { ManagementPageContent } from '../src/components/ManagementPageComponent
 import { useAuth } from '../src/hooks/useAuth';
 
 const ManagementPage: NextPage = () => {
-  const { signed } = useAuth();
-  const router = useRouter();
+  // const { signed } = useAuth();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if(!signed) {
-      router.push('/');
-    }
-  });
+  // useEffect(() => {
+  //   if(!signed) {
+  //     router.push('/');
+  //   }
+  // });
 
   return (
     <Flex

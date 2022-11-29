@@ -27,10 +27,10 @@ export const NewsCard = ({
     <Box
       bg={colorMode === 'dark' ? 'dark.300' : 'green.100'}
       w={{
-        sm: '20rem',
-        md: '14rem',
-        lg: '14rem',
-        xl: '20rem',
+        sm: '100%',
+        md: '100%',
+        lg: '100%',
+        xl: '100%',
       }}
       borderRadius="20px"
     >
@@ -39,7 +39,7 @@ export const NewsCard = ({
         borderRadius="20px 20px 0 0"
         w="100%"
         h={{
-          sm: '10rem',
+          sm: '6rem',
           md: '8rem',
           lg: '8rem',
           xl: '10rem',
@@ -48,7 +48,7 @@ export const NewsCard = ({
       />
       <Box
         p={{
-          sm: '2rem',
+          sm: '0.6rem',
           md: '0.8rem',
           lg: '0.8rem',
           xl: '2rem',
@@ -56,7 +56,7 @@ export const NewsCard = ({
       >
         <Heading
           fontSize={{
-            sm: '1.6rem',
+            sm: '1rem',
             md: '1.2rem',
             lg: '1.2rem',
             xl: '1.6rem',
@@ -66,7 +66,7 @@ export const NewsCard = ({
         </Heading>
         <Box
           fontSize={{
-            sm: '1rem',
+            sm: '0.6rem',
             md: '0.6rem',
             lg: '0.6rem',
             xl: '1rem',
@@ -75,20 +75,31 @@ export const NewsCard = ({
           {subtitle}
         </Box>
 
-        <Flex justifyContent="flex-end">
+        <Flex
+          justifyContent={{
+            sm: 'center',
+            md: 'flex-end',
+            lg: 'flex-end',
+          }}
+        >
           <Button
+            mt={{
+              sm: '1rem',
+            }}
+            w="100%"
             fontSize={{
               sm: '1rem',
               md: '0.8rem',
               lg: '0.8rem',
               xl: '1rem',
             }}
-            p={{
-              md: '0.6rem 0.8rem',
-              lg: '0.1rem 0.8rem',
-              xl: '0.6rem 0.8rem',
+            padding={{
+              sm: '2%',
+              md: '2%',
+              lg: '5%',
+              xl: '7%',
             }}
-            borderRadius="100px"
+            borderRadius="50px"
             rightIcon={<BiRightArrowAlt />}
             as="a"
             href={completeNoticeUrl}

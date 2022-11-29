@@ -5,15 +5,37 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Button,
   Flex,
   Heading,
   IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
   useColorMode,
+  useDisclosure,
 } from '@chakra-ui/react';
+import { Router } from 'next/router';
+import { useRef } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
+import { api } from '../../../api';
 
-export const TransactionCard = () => {
+interface ITransactionCardProps {
+  id: string;
+  description: string;
+  type: string;
+  amount: string;
+} 
+
+export const TransactionCard = ({amount, description, type, id}: ITransactionCardProps) => {
   const { colorMode } = useColorMode();
+  const deleteTransactionModal = useDisclosure();
+  const deleteTransactionRef = useRef();
 
   return (
     <>
@@ -38,8 +60,7 @@ export const TransactionCard = () => {
               overflow="hidden"
               textOverflow="ellipsis"
             >
-              Transação Descrita em algumas palavras
-              asdkajskdjaskdsajkdsakkdjaskdasdkjas
+              {description}
             </Heading>
             <Heading
               fontSize={{
@@ -49,7 +70,7 @@ export const TransactionCard = () => {
                 xl: '1.6rem',
               }}
             >
-              DESPESA
+              {type}
             </Heading>
             <Heading
               fontSize={{
@@ -59,7 +80,7 @@ export const TransactionCard = () => {
                 xl: '1.6rem',
               }}
             >
-              R$ 1000,00
+              {amount}
             </Heading>
           </Flex>
           <IconButton
@@ -76,7 +97,8 @@ export const TransactionCard = () => {
             _hover={{
               bg: 'none',
             }}
-          />
+            onClick={deleteTransactionModal.onOpen}
+            />
         </Flex>
       </Box>
       <Accordion allowToggle display={['block', 'block', 'none', 'none']}>
@@ -89,8 +111,7 @@ export const TransactionCard = () => {
               <Box maxWidth="100%" flex="1" textAlign="left" whiteSpace="nowrap"
               overflow="hidden"
               textOverflow="ellipsis">
-                Transação Descrita em algumas palavras
-              asdkajskdjaskdsajkdsakkdjaskdasdkjas
+                {description}
               </Box>
               <AccordionIcon />
             </AccordionButton>
@@ -122,7 +143,7 @@ export const TransactionCard = () => {
                     xl: '1.6rem',
                   }}
                 >
-                  DESPESA
+                  {type === 'expense' ? 'Saída' : 'Entrada'}
                 </Heading>
               </Flex>
               <Flex
@@ -146,7 +167,7 @@ export const TransactionCard = () => {
                     xl: '1.6rem',
                   }}
                 >
-                  R$ 1000,00
+                  {amount}
                 </Heading>
               </Flex>
               <IconButton
@@ -163,11 +184,47 @@ export const TransactionCard = () => {
                 _hover={{
                   bg: 'none',
                 }}
+                onClick={deleteTransactionModal.onOpen}
               />
             </Flex>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
+
+      <Modal
+        finalFocusRef={deleteTransactionRef}
+        isOpen={deleteTransactionModal.isOpen}
+        onClose={deleteTransactionModal.onClose}
+        isCentered
+      >
+        <ModalOverlay ref={deleteTransactionRef} />
+        <ModalContent>
+          <ModalHeader>Deletar Transação</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Tem certeza que deseja deletar a transação?</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="outline" mr={3} onClick={deleteTransactionModal.onClose}>
+              Cancelar
+            </Button>
+            <Button
+              variant="solid"
+              bg="red.100"
+              _hover={{
+                opacity: '88%',
+                bg: 'red.100',
+              }}
+              onClick={() => {
+                window.location.reload();
+                api.delete(`/transactions/${id}`);
+              }}
+            >
+              Sim, Deletar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

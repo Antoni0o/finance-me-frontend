@@ -6,14 +6,14 @@ import { HomePageContent } from '../src/components/HomePageComponents';
 import { useAuth } from '../src/hooks/useAuth';
 
 const HomePage: NextPage = () => {
-  const { signed } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if(!signed) {
+    const token = localStorage.getItem("@financeme:token");
+    if(!token) {
       router.push('/');
     }
-  });
+  }, []);
 
   return (
     <Flex

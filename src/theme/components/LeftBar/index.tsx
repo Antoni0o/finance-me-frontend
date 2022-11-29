@@ -30,12 +30,15 @@ export const LeftBar = () => {
 
   return (
     <>
-      <Flex width="100%" display={{
-        sm: 'flex',
-        md: 'flex',
-        lg: 'none',
-        xl: 'none'
-      }}>
+      <Flex
+        width="100%"
+        display={{
+          sm: 'flex',
+          md: 'flex',
+          lg: 'none',
+          xl: 'none',
+        }}
+      >
         <Flex
           margin="1rem"
           justifyContent="space-between"
@@ -170,6 +173,9 @@ export const LeftBar = () => {
                 _hover={{
                   bg: 'green.200',
                 }}
+                onClick={() => {
+                  router.push('/edit-profile');
+                }}
               >
                 Editar Perfil
               </Button>
@@ -200,12 +206,14 @@ export const LeftBar = () => {
           </>
         )}
       </Flex>
-      <Flex display={{
-        sm: 'none',
-        md: 'none',
-        lg: 'flex',
-        xl: 'flex'
-      }} margin="2rem">
+      <Flex
+        display={{
+          sm: 'none',
+          md: 'none',
+          lg: 'flex',
+          xl: 'flex',
+        }}
+      >
         <Box
           bg={colorMode === 'dark' ? 'dark.200' : 'green.150'}
           w="100%"
@@ -227,11 +235,7 @@ export const LeftBar = () => {
                 router.push('/home');
               }}
             >
-              <Image
-                src={Logo}
-                width="48px"
-                height="48px"
-              />
+              <Image src={Logo} width="48px" height="48px" />
             </Heading>
           </Flex>
           <Flex w="100%" mt="4rem" flexDirection="column" transition="0.3s">
@@ -326,6 +330,9 @@ export const LeftBar = () => {
                   _hover={{
                     bg: 'green.200',
                   }}
+                  onClick={() => {
+                    router.push('/edit-profile');
+                  }}
                 >
                   Editar Perfil
                 </Button>
@@ -406,6 +413,9 @@ export const LeftBar = () => {
                   variant="ghost"
                   color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
                   icon={<BsFillPersonFill />}
+                  onClick={() => {
+                    router.push('/edit-profile');
+                  }}
                 ></IconButton>
                 <IconButton
                   aria-label="Sair"

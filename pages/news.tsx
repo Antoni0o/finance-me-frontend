@@ -6,14 +6,14 @@ import { NewsPageContent } from '../src/components/NewsPageComponents';
 import { useAuth } from '../src/hooks/useAuth';
 
 const NewsPage: NextPage = () => {
-  const { signed } = useAuth();
-  const router = useRouter();
+  // const { signed } = useAuth();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if(!signed) {
-      router.push('/');
-    }
-  });
+  // useEffect(() => {
+  //   if(!signed) {
+  //     router.push('/');
+  //   }
+  // });
 
   return (
     <Flex
