@@ -25,7 +25,7 @@ type AuthResponse = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export const AuthProvider: React.FC = (props: AuxProps) => {
+export function AuthProvider(props: AuxProps) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
