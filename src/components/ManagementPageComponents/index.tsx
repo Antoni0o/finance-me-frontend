@@ -42,6 +42,7 @@ export const ManagementPageContent = () => {
 
   useEffect(() => {
     api.get(`/users/${user.id}`).then((res) => {
+      console.log(res.data);
       setTransactions(res.data.transactions);
     });
   }, []);
@@ -259,6 +260,7 @@ export const ManagementPageContent = () => {
                   description: transactionDescription,
                   amount: Number(transactionAmount),
                   type: transactionType,
+                  userId: user.id
                 }).then(() => {
                   window.location.reload();
                 });

@@ -1,38 +1,30 @@
 import {
   Button,
-  Divider,
-  Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
   Link,
-  Modal,
-  ModalOverlay,
   Text,
   useColorMode,
-  useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
-import { GrGoogle } from 'react-icons/gr';
 import Image from 'next/image';
 import Logo from '../../../public/logo.png';
 import { RegistrationContainer } from '../../theme/components/registrationContainer';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../hooks/useAuth';
-import { ForgotPasswordModalContent } from './ForgotPasswordModal';
 
 export const LoginContent = () => {
   const { colorMode } = useColorMode();
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { signIn } = useAuth();
   const router = useRouter();
 

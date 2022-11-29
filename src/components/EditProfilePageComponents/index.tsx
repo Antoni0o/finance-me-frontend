@@ -24,19 +24,21 @@ import {
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { api } from '../../api';
+import { useAuth } from '../../hooks/useAuth';
 import { LeftBar } from '../../theme/components/LeftBar';
 
 export const EditProfilePageContent = () => {
   const { colorMode } = useColorMode();
-  const [gridAreaLg, setGridAreaLg] = useState('8% 92%');
-  const [gridAreaMd, setGridAreaMd] = useState('12% 88%');
+  const [gridAreaLg, setGridAreaLg] = useState('4% 96%');
+  const [gridAreaMd, setGridAreaMd] = useState('6% 94%');
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
-  const [confirmOldPassword, setConfirmOldPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
+  const { user } = useAuth();
   const router = useRouter();
   const deleteUserModal = useDisclosure();
   const updatePassModal = useDisclosure();
@@ -61,15 +63,20 @@ export const EditProfilePageContent = () => {
         }}
         w="100%"
         transition="0.2s"
+        p={{
+          sm: '0',
+          md: '0',
+          lg: '2rem',
+        }}
       >
         <GridItem
           onMouseEnter={() => {
-            setGridAreaLg('30% 70%');
-            setGridAreaMd('30% 70%');
+            setGridAreaLg('25% 75%');
+            setGridAreaMd('25% 75%');
           }}
           onMouseLeave={() => {
-            setGridAreaLg('8% 92%');
-            setGridAreaMd('12% 88%');
+            setGridAreaLg('4% 96%');
+            setGridAreaMd('6% 94%');
           }}
         >
           <LeftBar />
@@ -81,6 +88,7 @@ export const EditProfilePageContent = () => {
             lg: '1.4rem',
             xl: '2rem',
           }}
+          m={{ sm: '2rem', lg: '0' }}
         >
           <Flex
             w="100%"
@@ -104,7 +112,7 @@ export const EditProfilePageContent = () => {
                 lg: '90%',
                 xl: '90%',
               }}
-              h="82vh"
+              h="80vh"
               borderRadius="20px 0 0 20px"
               p="1rem"
               mb="1rem"
@@ -132,132 +140,6 @@ export const EditProfilePageContent = () => {
                 },
               }}
             >
-              <FormControl
-                mb={{
-                  sm: '0.4rem',
-                  md: '0.6rem',
-                  lg: '0.6rem',
-                  xl: '0.8rem',
-                }}
-              >
-                <FormLabel
-                  color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
-                  opacity="80%"
-                >
-                  E-mail atual:
-                </FormLabel>
-                <Input
-                  bg={colorMode === 'dark' ? 'dark.100' : 'white.100'}
-                  value="email@email.com"
-                  type="email"
-                  variant="outline"
-                  focusBorderColor="green.300"
-                  disabled
-                />
-              </FormControl>
-              <FormControl
-                mb={{
-                  sm: '0.4rem',
-                  md: '0.6rem',
-                  lg: '0.6rem',
-                  xl: '0.8rem',
-                }}
-              >
-                <Divider borderColor="dark.100" opacity="66%" my="0.4rem" />
-
-                <FormLabel
-                  color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
-                  opacity="80%"
-                >
-                  Novo E-mail:
-                </FormLabel>
-                <Input
-                  bg={colorMode === 'dark' ? 'dark.100' : 'white.100'}
-                  isInvalid={isEmailInvalid}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  variant="outline"
-                  focusBorderColor="green.300"
-                  errorBorderColor="red.100"
-                />
-              </FormControl>
-
-              <Button
-                isLoading={isLoading}
-                w="100%"
-                h="3rem"
-                mb={{
-                  sm: '0.4rem',
-                  md: '0.6rem',
-                  lg: '0.6rem',
-                  xl: '0.8rem',
-                }}
-                borderRadius="10px"
-                fontSize="2xl"
-                variant="solid"
-                onClick={() => {
-                  setIsEmailInvalid(false);
-                  setIsLoading(true);
-
-                  api
-                    .patch('/users', {
-                      email,
-                    })
-                    .then(() => {
-                      toast({
-                        title: 'E-mail alterado com sucesso!',
-                        status: 'success',
-                        position: 'top-right',
-                        isClosable: true,
-                      });
-                    })
-                    .catch((e) => {
-                      setTimeout(() => {
-                        setIsLoading(false);
-                      }, 1000);
-
-                      if (e.response.data.message instanceof Array<string>) {
-                        e.response.data.message.map((error: string) => {
-                          if (error.includes('email')) {
-                            setIsEmailInvalid(true);
-                          }
-                        });
-                      }
-
-                      if (!Array.isArray(e.response.data.message)) {
-                        toast({
-                          title: 'Não foi Editar o E-mail',
-                          description: 'Este E-mail já está sendo usado!',
-                          status: 'error',
-                          position: 'top-right',
-                          isClosable: true,
-                        });
-                      }
-
-                      if (
-                        Array.isArray(e.response.data.message) &&
-                        e.response.status === 400
-                      ) {
-                        toast({
-                          title: 'Não foi possível criar o usuário',
-                          description:
-                            'Verifique as informações e tente novamente',
-                          status: 'error',
-                          position: 'top-right',
-                          isClosable: true,
-                        });
-                      }
-                    });
-                }}
-              >
-                Alterar E-mail
-              </Button>
-              <Flex gap="0.5rem" alignItems="center" mb="0.6rem">
-                <Divider borderColor="dark.100" opacity="66%" />
-                <Text opacity="66%">Ou</Text>
-                <Divider borderColor="dark.100" opacity="66%" />
-              </Flex>
               <Button
                 w="100%"
                 h="3rem"
@@ -292,6 +174,10 @@ export const EditProfilePageContent = () => {
                 fontSize="2xl"
                 variant="solid"
                 bg="red.100"
+                _hover={{
+                  opacity: '88%',
+                  bg:"red.100",
+                }}
                 onClick={deleteUserModal.onOpen}
               >
                 Deletar Conta
@@ -324,6 +210,18 @@ export const EditProfilePageContent = () => {
               _hover={{
                 opacity: '88%',
                 bg: 'red.100',
+              }}
+              onClick={() => {
+                api.delete(`/users/${user.id}`).then(() => {
+                  toast({
+                    title: 'Conta deletada com sucesso!',
+                    status: 'success',
+                    position: 'top-right',
+                    isClosable: true,
+                  });
+
+                  router.push('/');
+                });
               }}
             >
               Sim, Deletar
@@ -360,26 +258,8 @@ export const EditProfilePageContent = () => {
               </FormLabel>
               <Input
                 bg={colorMode === 'dark' ? 'dark.100' : 'white.100'}
-                isInvalid={isPasswordInvalid}
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
-                type="password"
-                variant="outline"
-                focusBorderColor="green.300"
-                errorBorderColor="red.100"
-              />
-              <FormLabel
-                mt="1rem"
-                color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
-                opacity="80%"
-              >
-                Repita a Senha Antiga:
-              </FormLabel>
-              <Input
-                bg={colorMode === 'dark' ? 'dark.100' : 'white.100'}
-                isInvalid={isPasswordInvalid}
-                value={confirmOldPassword}
-                onChange={(e) => setConfirmOldPassword(e.target.value)}
                 type="password"
                 variant="outline"
                 focusBorderColor="green.300"
@@ -402,6 +282,23 @@ export const EditProfilePageContent = () => {
                 focusBorderColor="green.300"
                 errorBorderColor="red.100"
               />
+              <FormLabel
+                mt="1rem"
+                color={colorMode === 'dark' ? 'light.200' : 'dark.200'}
+                opacity="80%"
+              >
+                Repita a nova Senha:
+              </FormLabel>
+              <Input
+                bg={colorMode === 'dark' ? 'dark.100' : 'white.100'}
+                isInvalid={isPasswordInvalid}
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+                type="password"
+                variant="outline"
+                focusBorderColor="green.300"
+                errorBorderColor="red.100"
+              />
             </FormControl>
           </ModalBody>
           <ModalFooter>
@@ -410,6 +307,52 @@ export const EditProfilePageContent = () => {
             </Button>
             <Button
               variant="solid"
+              onClick={async () => {
+                if (newPassword != confirmNewPassword) {
+                  setIsPasswordInvalid(true);
+                  toast({
+                    title: 'Não foi possível alterar a senha',
+                    description: 'As senhas são diferentes!',
+                    status: 'error',
+                    position: 'top-right',
+                    isClosable: true,
+                  });
+                } else {
+                  api.post('/auth/login', {
+                    email: user.email,
+                    password: oldPassword
+                  }).then(() => {
+                    api.patch(`users/${user.id}`, {
+                      password: newPassword
+                    }).then(() => {
+                      toast({
+                        title: 'Senha alterada com sucesso!',
+                        status: 'success',
+                        position: 'top-right',
+                        isClosable: true,
+                      });
+
+                      router.push('/login');
+                    }).catch((e) => {
+                      toast({
+                        title: 'Não foi possível alterar a senha',
+                        description: e.response.data.message,
+                        status: 'error',
+                        position: 'top-right',
+                        isClosable: true,
+                      });
+                    });
+                  }).catch((e) => {
+                    toast({
+                      title: 'Não foi possível alterar a senha',
+                      description: 'Senha antiga incorreta',
+                      status: 'error',
+                      position: 'top-right',
+                      isClosable: true,
+                    });
+                  });
+                }
+              }}
             >
               Alterar
             </Button>
