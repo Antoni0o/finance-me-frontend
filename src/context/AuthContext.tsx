@@ -25,7 +25,7 @@ type AuthResponse = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export const AuthProvider: React.FC = ({children}: AuxProps) => {
+export const AuthProvider: React.FC = (props: AuxProps) => {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
@@ -68,7 +68,7 @@ export const AuthProvider: React.FC = ({children}: AuxProps) => {
 
   return (
     <AuthContext.Provider value={{ signed: Boolean(user), user, signIn, signOut }}>
-      {children}
+      {props.children}
     </AuthContext.Provider>
   )
 }
