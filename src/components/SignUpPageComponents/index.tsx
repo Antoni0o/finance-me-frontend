@@ -66,7 +66,16 @@ export const SignUpContent = () => {
 
   return (
     <RegistrationContainer>
-      <Image src={Logo} width="64px" height="64px" />
+      <Flex cursor="pointer">
+        <Image
+          src={Logo}
+          width="64px"
+          height="64px"
+          onClick={() => {
+            router.push('/');
+          }}
+        />
+      </Flex>
       <Heading
         fontWeight="light"
         letterSpacing="-0.1rem"

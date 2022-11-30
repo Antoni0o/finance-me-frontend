@@ -7,6 +7,8 @@ import {
   Box,
   Button,
   Flex,
+  Grid,
+  GridItem,
   Heading,
   IconButton,
   Modal,
@@ -16,12 +18,14 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Td,
   Text,
+  Tr,
   useColorMode,
   useDisclosure,
 } from '@chakra-ui/react';
 import { Router } from 'next/router';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { api } from '../../../api';
 
@@ -41,66 +45,71 @@ export const TransactionCard = ({
   const { colorMode } = useColorMode();
   const deleteTransactionModal = useDisclosure();
   const deleteTransactionRef = useRef();
+  const [finalAmount, setFinalAmount] = useState(amount);
+  
+  useEffect(() => {
+    if(type === 'expense') {
+      setFinalAmount("-" + Number(amount).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }));
+    } else {
+      setFinalAmount(Number(amount).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }));
+    }
+  }, [])
 
   return (
     <>
-      <Box
+      <Box 
         bg={colorMode === 'dark' ? 'dark.300' : 'green.100'}
-        width="100%"
-        padding="1rem"
+        fontWeight="bold"
         borderRadius="20px"
+        p="1rem"
         display={['none', 'none', 'block', 'block']}
       >
-        <Flex>
-          <Flex justifyContent="space-around" alignItems="center" width="95%">
-            <Heading
-              maxWidth="60%"
-              fontSize={{
-                sm: '1rem',
-                md: '1.2rem',
-                lg: '1.2rem',
-                xl: '1.6rem',
-              }}
-              whiteSpace="nowrap"
-              overflow="hidden"
-              textOverflow="ellipsis"
-            >
-              {description}
-            </Heading>
-            {type === 'expense' ? (
-              <Heading
-                fontSize={{
-                  sm: '1rem',
-                  md: '1.2rem',
-                  lg: '1.2rem',
-                  xl: '1.6rem',
-                }}
-              >
-                Saída
-              </Heading>
-            ) : (
-              <Heading
-                fontSize={{
-                  sm: '1rem',
-                  md: '1.2rem',
-                  lg: '1.2rem',
-                  xl: '1.6rem',
-                }}
-              >
-                Entrada
-              </Heading>
-            )}
-            <Heading
-              fontSize={{
-                sm: '1rem',
-                md: '1.2rem',
-                lg: '1.2rem',
-                xl: '1.6rem',
-              }}
-            >
-              {amount}
-            </Heading>
-          </Flex>
+        <Grid gridTemplateColumns="50% 20% 20% 10%" alignItems="center">
+        <GridItem
+          fontSize={{
+            sm: '1rem',
+            md: '1.2rem',
+            lg: '1.2rem',
+            xl: '1.6rem',
+          }}
+          whiteSpace="nowrap"
+          overflow="hidden"
+          textOverflow="ellipsis"
+        >
+          {description}
+        </GridItem>
+        <GridItem
+          textAlign="end"
+          fontSize={{
+            sm: '1rem',
+            md: '1.2rem',
+            lg: '1.2rem',
+            xl: '1.6rem',
+          }}
+        >
+          {type === 'expense' ? <>Saída</> : <>Entrada</>}
+        </GridItem>
+        <GridItem
+          textAlign="end"
+          fontSize={{
+            sm: '1rem',
+            md: '1.2rem',
+            lg: '1.2rem',
+            xl: '1.6rem',
+          }}
+          color={type === 'expense' ? 'red.100' : 'green.300'}
+        >
+          {finalAmount}
+        </GridItem>
+        <GridItem
+          textAlign="end"
+        >
           <IconButton
             color="red.100"
             fontSize={{
@@ -117,7 +126,8 @@ export const TransactionCard = ({
             }}
             onClick={deleteTransactionModal.onOpen}
           />
-        </Flex>
+        </GridItem>
+        </Grid>
       </Box>
       <Accordion allowToggle display={['block', 'block', 'none', 'none']}>
         <AccordionItem

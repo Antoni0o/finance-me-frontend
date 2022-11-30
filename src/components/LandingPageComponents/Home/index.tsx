@@ -1,8 +1,11 @@
 import { Button, Flex, Heading } from '@chakra-ui/react';
 import HomeImg from '../../../../public/home-image.png';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export const Home = () => {
+  const router = useRouter();
+
   return (
     <Flex
       w="80%"
@@ -23,6 +26,9 @@ export const Home = () => {
           w={['50%', '50%', '45%', '40%']}
           fontSize={['lmd', '1xl', '1xl', '2xl']}
           fontWeight="black"
+          onClick={() => {
+            router.push('/sign-up')
+          }}
         >
           Comece Agora!
         </Button>

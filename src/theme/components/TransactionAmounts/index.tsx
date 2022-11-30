@@ -129,12 +129,12 @@ export const TransactionAmounts = ({
           lg: '0.6rem',
           xl: '1rem',
         }}
-        bg={colorMode == 'dark' ? 'dark.200' : 'green.150'}
+        bg={parseFloat(amounts.amount.replace("R$", "").replace(".", "").replace(",", ".")) >= 0 ? 'green.300' : 'red.100'}
+        color="light.100"
         borderRadius="xl"
         boxShadow="xl"
       >
         <Heading
-          color={colorMode == 'dark' ? 'light.100' : 'dark.100'}
           fontSize={{
             sm: 'medium',
             md: 'large',

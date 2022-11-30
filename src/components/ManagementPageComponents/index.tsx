@@ -15,6 +15,12 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Table,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
   useColorMode,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -25,7 +31,6 @@ import { api } from '../../api';
 import { useAuth } from '../../hooks/useAuth';
 import { LeftBar } from '../../theme/components/LeftBar';
 import { TransactionAmounts } from '../../theme/components/TransactionAmounts';
-import { User } from '../../types/User';
 import { TransactionCard } from './TransactionCard';
 
 export const ManagementPageContent = () => {
@@ -42,7 +47,6 @@ export const ManagementPageContent = () => {
 
   useEffect(() => {
     api.get(`/users/${user.id}`).then((res) => {
-      console.log(res.data);
       setTransactions(res.data.transactions);
     });
   }, []);
@@ -66,11 +70,11 @@ export const ManagementPageContent = () => {
         p={{
           sm: '0',
           md: '0',
-          lg: '2rem'
+          lg: '2rem',
         }}
         gap="1rem"
         transition="0.2s"
-        justifyContent='center'
+        justifyContent="center"
       >
         <GridItem
           onMouseEnter={() => {
@@ -84,10 +88,8 @@ export const ManagementPageContent = () => {
         >
           <LeftBar />
         </GridItem>
-        <GridItem m={{sm: "2rem", lg: "0"}}>
-          <TransactionAmounts
-            userId={user.id}
-          />
+        <GridItem m={{ sm: '2rem', lg: '0' }}>
+          <TransactionAmounts userId={user.id} />
           <Flex
             w="100%"
             justifyContent="flex-end"
@@ -150,7 +152,7 @@ export const ManagementPageContent = () => {
                 },
               }}
             >
-              <Flex flexDirection="column" width="100%" gap="0.6rem">
+              <Flex width="100%" flexDirection="column" gap="0.4rem">
                 {transactions.map((transaction, index) => (
                   <TransactionCard
                     key={index}
@@ -256,14 +258,16 @@ export const ManagementPageContent = () => {
             <Button
               variant="solid"
               onClick={() => {
-                api.post('/transactions', {
-                  description: transactionDescription,
-                  amount: Number(transactionAmount),
-                  type: transactionType,
-                  userId: user.id
-                }).then(() => {
-                  window.location.reload();
-                });
+                api
+                  .post('/transactions', {
+                    description: transactionDescription,
+                    amount: Number(transactionAmount),
+                    type: transactionType,
+                    userId: user.id,
+                  })
+                  .then(() => {
+                    window.location.reload();
+                  });
               }}
             >
               Criar
