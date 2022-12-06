@@ -36,7 +36,7 @@ export const HomePageContent = ({userId}: IPageProps) => {
   const {user} = useAuth();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/news').then((res) => {
+    axios.get('https://finance-me-frontend.vercel.app/api/news').then((res) => {
       setNews(res.data.news);
     })
   }, [])

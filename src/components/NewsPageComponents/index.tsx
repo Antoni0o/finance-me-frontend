@@ -18,7 +18,7 @@ export const NewsPageContent = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/news').then((res) => {
+    axios.get('https://finance-me-frontend.vercel.app/api/news').then((res) => {
       setNews(res.data.news);
     });
   }, []);
