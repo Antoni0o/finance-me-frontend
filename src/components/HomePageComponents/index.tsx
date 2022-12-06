@@ -15,6 +15,7 @@ import { TransactionAmounts } from '../../theme/components/TransactionAmounts';
 import { useRouter } from 'next/router';
 import { api } from '../../api';
 import { useAuth } from '../../hooks/useAuth';
+import axios from 'axios';
 
 
 interface IUserResponse {
@@ -30,8 +31,15 @@ export const HomePageContent = ({userId}: IPageProps) => {
   const { colorMode } = useColorMode();
   const [gridAreaLg, setGridAreaLg] = useState('4% 96%');
   const [gridAreaMd, setGridAreaMd] = useState('6% 94%');
+  const [news, setNews] = useState([]);
   const router = useRouter();
   const {user} = useAuth();
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/news').then((res) => {
+      setNews(res.data.news);
+    })
+  }, [])
 
   return (
     <Grid
@@ -151,30 +159,20 @@ export const HomePageContent = ({userId}: IPageProps) => {
               },
             }}
           >
-            <NewsCard
-              imageUrl="https://ichef.bbci.co.uk/news/800/cpsprodpb/1671E/production/_127243919_gettyimages-1130747337.jpg.webp"
-              title="As 6 empresas mais endividadas do mundo..."
-              subtitle="Um balanço saudável e contas equilibradas costumam ser o objetivo de qualquer ator econômico: um Estado, uma empresa ou até mesmo uma família."
-              completeNoticeUrl="https://www.bbc.com/portuguese/internacional-63338807"
-            />
-            <NewsCard
-              imageUrl="https://ichef.bbci.co.uk/news/800/cpsprodpb/1671E/production/_127243919_gettyimages-1130747337.jpg.webp"
-              title="As 6 empresas mais endividadas do mundo..."
-              subtitle="Um balanço saudável e contas equilibradas costumam ser o objetivo de qualquer ator econômico: um Estado, uma empresa ou até mesmo uma família."
-              completeNoticeUrl="https://www.bbc.com/portuguese/internacional-63338807"
-            />
-            <NewsCard
-              imageUrl="https://ichef.bbci.co.uk/news/800/cpsprodpb/1671E/production/_127243919_gettyimages-1130747337.jpg.webp"
-              title="As 6 empresas mais endividadas do mundo..."
-              subtitle="Um balanço saudável e contas equilibradas costumam ser o objetivo de qualquer ator econômico: um Estado, uma empresa ou até mesmo uma família."
-              completeNoticeUrl="https://www.bbc.com/portuguese/internacional-63338807"
-            />
-            <NewsCard
-              imageUrl="https://ichef.bbci.co.uk/news/800/cpsprodpb/1671E/production/_127243919_gettyimages-1130747337.jpg.webp"
-              title="As 6 empresas mais endividadas do mundo..."
-              subtitle="Um balanço saudável e contas equilibradas costumam ser o objetivo de qualquer ator econômico: um Estado, uma empresa ou até mesmo uma família."
-              completeNoticeUrl="https://www.bbc.com/portuguese/internacional-63338807"
-            />
+            {news &&
+              news.map((notice, index) => {
+                if(index < 5) {
+                  return (
+                    <NewsCard
+                    imageUrl={notice.urlToImage}
+                    title={notice.title}
+                    subtitle={notice.description}
+                    completeNoticeUrl={notice.url}
+                  />
+                  )
+                }
+              })
+            }
           </Box>
           <Flex
             w="100%"

@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   Image,
+  Text,
   useColorMode,
 } from '@chakra-ui/react';
 import { BiRightArrowAlt } from 'react-icons/bi';
@@ -47,7 +48,7 @@ export const NewsCard = ({
         alt={title}
       />
       <Box
-        p={{
+      p={{
           sm: '0.6rem',
           md: '0.8rem',
           lg: '0.8rem',
@@ -61,19 +62,26 @@ export const NewsCard = ({
             lg: '1.2rem',
             xl: '1.6rem',
           }}
+          noOfLines={3}
+          overflow="hidden"
+          textOverflow="ellipsis"
         >
           {title}
         </Heading>
-        <Box
+        <Text
+          noOfLines={2}
           fontSize={{
             sm: '0.6rem',
             md: '0.6rem',
             lg: '0.6rem',
             xl: '1rem',
           }}
+          marginTop="0.4rem"
+          overflow="hidden"
+          textOverflow="ellipsis"
         >
           {subtitle}
-        </Box>
+        </Text>
 
         <Flex
           justifyContent={{

@@ -192,7 +192,6 @@ export const SignUpContent = () => {
           />
         </Flex>
       </FormControl>
-
       <Button
         isLoading={isLoading}
         w="100%"
