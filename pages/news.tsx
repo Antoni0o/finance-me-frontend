@@ -1,34 +1,29 @@
 import { Flex } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Head from 'next/head';
 import { NewsPageContent } from '../src/components/NewsPageComponents';
-import { useAuth } from '../src/hooks/useAuth';
 
 const NewsPage: NextPage = () => {
-  // const { signed } = useAuth();
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   if(!signed) {
-  //     router.push('/');
-  //   }
-  // });
-
   return (
-    <Flex
-      overflowX="hidden"
-      overflowY={{
-        sm: 'scroll',
-        md: 'scroll',
-        lg: 'hidden',
-        xl: 'hidden'
-      }}
-      w="100vw"
-      h="100vh"
-    >
-      <NewsPageContent />
-    </Flex>
+    <>
+      <Head>
+        <title>FinanceMe - Notícias</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Flex
+        overflowX="hidden"
+        overflowY={{
+          sm: 'scroll',
+          md: 'scroll',
+          lg: 'hidden',
+          xl: 'hidden',
+        }}
+        w="100vw"
+        h="100vh"
+      >
+        <NewsPageContent />
+      </Flex>
+    </>
   );
 };
 

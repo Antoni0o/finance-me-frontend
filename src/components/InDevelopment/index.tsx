@@ -7,7 +7,7 @@ export const InDevelopment = () => {
       alignItems='center'
       mt='20%'
     >
-      <Heading>EM DESENVOLVIMENTO</Heading>
+      <Heading>Página não encontrada!</Heading>
     </Flex>
   );
 }
